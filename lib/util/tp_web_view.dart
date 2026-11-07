@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:town_pass/gen/assets.gen.dart';
 import 'package:town_pass/util/tp_app_bar.dart';
 import 'package:town_pass/util/tp_colors.dart';
+import 'package:town_pass/util/tp_constant.dart';
 import 'package:town_pass/util/web_message_handler/tp_web_message_listener.dart';
 
 class WebViewArgument {
@@ -48,7 +49,7 @@ class TPWebView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    final page = Scaffold(
       appBar: TPAppBar(
         backgroundColor: TPColors.primary500,
         foregroundColor: TPColors.white,
@@ -99,6 +100,23 @@ class TPWebView extends StatelessWidget {
           return GeolocationPermissionShowPromptResponse(origin: origin, allow: true, retain: true);
         },
         onCloseWindow: (_) => Get.back(),
+      ),
+    );
+
+    // AI 學習村的系統返回鍵要回到網頁的情境選單，其他網頁維持直接關閉。
+    if (url != tpAiVillageUrl) {
+      return page;
+    }
+
+    return Obx(
+      () => PopScope(
+        canPop: !canGoBack.value,
+        onPopInvokedWithResult: (didPop, _) async {
+          if (!didPop) {
+            await webViewController.value?.goBack();
+          }
+        },
+        child: page,
       ),
     );
   }
