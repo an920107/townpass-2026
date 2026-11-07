@@ -20,20 +20,26 @@ Here are some quick setup guide.
 
 ## Build the Project
 
-1. Get the packages project needed:
+1. Install the Flutter version pinned in `.fvmrc` and link the project to it:
 
    ``` bash
-   flutter pub get
+   fvm use
    ```
 
-2. Generate additional needed dart code for the project.
+2. Get the packages project needed:
 
    ``` bash
-   dart run build_runner build
+   fvm flutter pub get
    ```
 
-3. You are all set now, Run the project from your IDE or the through the command line:
+3. Generate additional needed dart code for the project.
 
    ``` bash
-   flutter run
+   fvm dart run build_runner build
+   ```
+
+4. You are all set now, Run the project from your IDE or through the command line:
+
+   ``` bash
+   fvm flutter run
    ```
