@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:town_pass/gen/assets.gen.dart';
+import 'package:town_pass/util/tp_constant.dart';
 
 // 先於 MyServiceItemId enum 加入新服務；
 // 再在 MyServiceIdExt 擴充中加入該服務的 MyServiceItem 物件。
@@ -18,6 +19,7 @@ enum MyServiceItemId {
   police,
   neighborhood,
   disasterReport,
+  aiVillage,
   vaccineAppointment,
   medicalAppointment,
   cityRadio,
@@ -105,6 +107,14 @@ extension MyServiceIdExt on MyServiceItemId {
           icon: Assets.svg.iconEarthquake.svg(),
           category: MyServiceCategory.cityService,
           destinationUrl: 'https://taipei-pass-service.vercel.app/disaster-report',
+        ),
+      MyServiceItemId.aiVillage => MyServiceItem(
+          title: 'AI 學習村',
+          description: '用互動繪本學會使用 AI',
+          icon: Assets.svg.iconAiVillage.svg(),
+          category: MyServiceCategory.cityService,
+          destinationUrl: tpAiVillageUrl,
+          forceWebViewTitle: 'AI 學習村',
         ),
       MyServiceItemId.vaccineAppointment => MyServiceItem(
           title: '疫苗預約',
